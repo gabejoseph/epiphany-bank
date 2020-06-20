@@ -5,8 +5,13 @@ class UsersController < ApplicationController
         erb :'/users/login'
     end 
 
-    post 'login' do 
+    post '/login' do 
 
+
+        @user = User.create(name: params[:name], email: params[:email], password: params[:password])
+        @user.save
+        binding.pry
+        redirect to '/epiphanies'
     end 
 
     get '/signup' do 
