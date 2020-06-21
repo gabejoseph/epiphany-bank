@@ -39,10 +39,6 @@ class UsersController < ApplicationController
         end 
     end 
 
-    get '/epiphanies' do 
-        erb :'/epiphanies/epiphanies'
-    end 
-
     get '/logout' do
         if logged_in?
           session.clear
