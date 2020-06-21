@@ -5,7 +5,6 @@ class UsersController < ApplicationController
         if logged_in?
             redirect to '/epiphanies'
         else 
-            binding.pry
             erb :'/users/signup'
         end 
     end 
@@ -19,7 +18,6 @@ class UsersController < ApplicationController
         @user = User.create(name: params[:name], email: params[:email], password: params[:password])
         @user.save
         session[:user_id] = @user.id
-        binding.pry
         redirect to "/epiphanies"
     end 
 
@@ -40,6 +38,12 @@ class UsersController < ApplicationController
             redirect to '/login'
         end 
     end 
+
+    # get '/users/:slug' do 
+    #     slug = params[:slug]
+    #     @user = User.find_by(username: slug)
+    #     erb :'/users/show'
+    # end 
 
     get '/logout' do
         if logged_in?

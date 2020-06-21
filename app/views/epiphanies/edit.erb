@@ -1,0 +1,6 @@
+<%= @epiphanies.content %>
+<form action="/epiphanies/<%= @epiphanies.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <input id="content" type="text" name="content" value="<%= @epiphanies.content %>">
+    <input type="submit" value="submit">
+</form>
