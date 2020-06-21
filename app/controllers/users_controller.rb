@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
     get '/login' do  
         if logged_in? 
+            binding.pry
             redirect to '/epiphanies'
         else 
             erb :'/users/login'
@@ -35,6 +36,17 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect to '/epiphanies'
         else 
+            redirect to '/login'
+        end 
+    end 
+
+    get '/epiphanies' do
+        binding.pry 
+        if logged_in?
+            @epiphanies = Epiphany.all
+            @user = self.current_user
+            erb :'/epiphanies/epiphanies'
+        else
             redirect to '/login'
         end 
     end 

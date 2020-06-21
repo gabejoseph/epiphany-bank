@@ -2,10 +2,13 @@ require 'pry'
 class EpiphaniesController < ApplicationController
 
     get '/epiphanies' do 
-        binding.pry
-        @epiphanies = Epiphany.all
-        @user = self.current_user
-        erb :'/epiphanies/epiphanies'
+        if logged_in?
+            @epiphanies = Epiphany.all
+            @user = self.current_user
+            erb :'/epiphanies/epiphanies'
+        else
+            redirect to '/login'
+        end 
     end 
 
 
