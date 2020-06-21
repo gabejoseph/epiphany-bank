@@ -5,6 +5,7 @@ class EpiphaniesController < ApplicationController
         if logged_in?
             @epiphanies = Epiphany.all
             @user = self.current_user
+            binding.pry
             erb :'/epiphanies/epiphanies'
         else
             redirect to '/login'
