@@ -1,8 +1,13 @@
 <p>Welcome, here are everyones Epiphanies!</p>
 
 <% @epiphanies.each do |y| %>
-    <h4><%= y.content %></h4>
+    <h4><%= y.content %></h4><i><%= y.user.name %></i>
 <% end %>
+
+<h4><a href='/epiphanies/new'>Create a New Epiphany</a></h4>
+<h4><a href='/logout'>Logout</a></h4>
+
+
 
 
 
