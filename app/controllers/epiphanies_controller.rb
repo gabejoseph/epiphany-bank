@@ -64,13 +64,13 @@ class EpiphaniesController < ApplicationController
     end 
 
     get '/epiphanies/:id/delete' do 
-        binding.pry
-        @epiphanies = Epiphany.find_by(user_id: params[:id])
+        @epiphanies = Epiphany.find_by(id: params[:id])
         if current_user.id != @epiphanies.user_id
             redirect to '/epiphanies'
+        else 
+            @epiphanies.delete
+            redirect to '/epiphanies'
         end 
-        @epiphanies.delete
-        redirect to '/epiphanies'
     end 
 
 end 
