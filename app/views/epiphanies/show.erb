@@ -1,11 +1,10 @@
 <h1>My Epiphanies</h1>
+<i>click to edit</i>
 </br>
 <% @all_epiphanies.each do |x| %>
-    <p><%= x.content %></p>
+    <p><a href="/epiphanies/<%= x.id %>/edit"><%= x.content %></p>
 <% end  %>
 
 <form method="POST" action="/epiphanies/<%= @epiphanies.id %>/delete">
 <input type="submit" value="Delete Epiphany">
 </form>
-</br>
-<a href="/epiphanies/<%= @epiphanies.id %>/edit">Edit Epiphany</a>
