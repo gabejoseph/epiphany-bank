@@ -32,7 +32,6 @@ class EpiphaniesController < ApplicationController
         if !logged_in?
             redirect to '/login'
         else 
-            binding.pry
             @all_epiphanies = []
             blank = Epiphany.all
             blank.each do |x|
@@ -40,7 +39,6 @@ class EpiphaniesController < ApplicationController
                     @all_epiphanies << x
                 end 
             end 
-            binding.pry
             @epiphanies = Epiphany.find_by(user_id: params[:id])
             erb :'/epiphanies/show'
         end 
@@ -59,15 +57,14 @@ class EpiphaniesController < ApplicationController
         if params[:content].empty?
             redirect to "/epiphanies/#{params[:id]}/edit"
         end 
-        binding.pry
         @epiphanies = Epiphany.find_by(id: params[:id])
         @epiphanies.update(content: params[:content])
         @epiphanies.save
-        binding.pry
         redirect to "/epiphanies/#{@epiphanies.id}"
     end 
 
-    post '/epiphanies/:id/delete' do 
+    get '/epiphanies/:id/delete' do 
+        binding.pry
         @epiphanies = Epiphany.find_by(user_id: params[:id])
         if current_user.id != @epiphanies.user_id
             redirect to '/epiphanies'
