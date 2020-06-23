@@ -32,13 +32,14 @@ class EpiphaniesController < ApplicationController
         if !logged_in?
             redirect to '/login'
         else 
-            array = []
-            blank1 = Epiphany.all
-            if blank1
-            Epiphany.all.each{|x| @epiphanies << x.user_id == session[:user_id]}
-            binding.pry
-            @epiphanies = @epiphany.each{|x| x.user_id == session[:user_id]}
-            @blank = Epiphany.find_by(user_id: params[:id])
+            @all_epiphanies = []
+            blank = Epiphany.all
+            blank.each do |x|
+                if x.user_id == session[:user_id]
+                    @all_epiphanies << x
+                end 
+            end 
+            @epiphanies = Epiphany.find_by(user_id: params[:id])
             erb :'/epiphanies/show'
         end 
     end 

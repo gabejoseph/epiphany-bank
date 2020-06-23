@@ -1,4 +1,9 @@
-<p><%= @epiphanies.content %></p>
+<h1>My Epiphanies</h1>
+</br>
+<% @all_epiphanies.each do |x| %>
+    <p><%= x.content %></p>
+<% end  %>
+
 <form method="POST" action="/epiphanies/<%= @epiphanies.id %>/delete">
 <input type="submit" value="Delete Epiphany">
 </form>
