@@ -3,7 +3,6 @@ class EpiphaniesController < ApplicationController
 
     get '/epiphanies' do 
         if logged_in?
-            @epiphanies = Epiphany.all
             @user = self.current_user
             erb :'/epiphanies/epiphanies'
         else
@@ -23,6 +22,7 @@ class EpiphaniesController < ApplicationController
         if !params[:content].empty?
             @epiphanies = Epiphany.create(content: params[:content], user_id: session[:user_id])
             @epiphanies.save
+            erb :'/epiphanies/epiphanies'
         else 
             redirect to '/epiphanies/new'
         end 
@@ -32,8 +32,14 @@ class EpiphaniesController < ApplicationController
         if !logged_in?
             redirect to '/login'
         else 
-            @epiphanies = Epiphany.find_by(user_id: params[:id])
-            erb :'/epiphanies/show_epiphanies'
+            array = []
+            blank1 = Epiphany.all
+            if blank1
+            Epiphany.all.each{|x| @epiphanies << x.user_id == session[:user_id]}
+            binding.pry
+            @epiphanies = @epiphany.each{|x| x.user_id == session[:user_id]}
+            @blank = Epiphany.find_by(user_id: params[:id])
+            erb :'/epiphanies/show'
         end 
     end 
 

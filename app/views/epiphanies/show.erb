@@ -1,5 +1,6 @@
+<p><%= @epiphanies.content %></p>
 <form method="POST" action="/epiphanies/<%= @epiphanies.id %>/delete">
 <input type="submit" value="Delete Epiphany">
 </form>
-<p><%= @epiphanies.content %></p>
+</br>
 <a href="/epiphanies/<%= @epiphanies.id %>/edit">Edit Epiphany</a>
