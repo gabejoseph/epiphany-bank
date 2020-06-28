@@ -1,5 +1,5 @@
 <h1>My Epiphanies</h1>
-<i>click to edit</i>
+</br><i>click to edit</i>
 </br>
 
 <% if !@all_epiphanies.empty? %>
@@ -7,12 +7,12 @@
         </br><a href="/epiphanies/<%= x.id %>/edit"><%= x.content %></a></br>
     <% end  %>
 <% else %>
-    <h4>You don't have any epiphanies yet!  Click below to create your first one!</h4>
+    </br><h4>You don't have any epiphanies yet!  Click below to create your first one!</h4>
 <% end %>
 </br>
 
 <h4><a href='/epiphanies/new'>Create a New Epiphany</a></h4>
-<form method="POST" action="/epiphanies/<%= @epiphanies.id %>/delete">
-</form>
 <h4><a href='/logout'>Logout</a></h4>
+
+
 

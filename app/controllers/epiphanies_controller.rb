@@ -3,7 +3,7 @@ class EpiphaniesController < ApplicationController
 
     get '/epiphanies' do 
         if logged_in?
-            @user = self.current_user
+            @session = session[:user_id]
             erb :'/epiphanies/epiphanies'
         else
             redirect to '/login'
@@ -14,6 +14,7 @@ class EpiphaniesController < ApplicationController
         if !logged_in?
             redirect to '/login'
         else 
+            @session = session[:user_id]
             erb :'/epiphanies/new'
         end 
     end  
@@ -29,9 +30,11 @@ class EpiphaniesController < ApplicationController
     end 
 
     get '/epiphanies/:id' do 
+        binding.pry
         if !logged_in?
             redirect to '/login'
         else 
+            binding.pry
             @all_epiphanies = []
             blank = Epiphany.all
             blank.each do |x|
@@ -40,6 +43,7 @@ class EpiphaniesController < ApplicationController
                 end 
             end 
             @epiphanies = Epiphany.find_by(user_id: params[:id])
+            binding.pry
             erb :'/epiphanies/show'
         end 
     end 
