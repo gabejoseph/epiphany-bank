@@ -22,7 +22,6 @@ class EpiphaniesController < ApplicationController
     post '/epiphanies' do 
         if !params[:content].empty?
             @epiphanies = Epiphany.create(content: params[:content], user_id: session[:user_id])
-            @epiphanies.save
             erb :'/epiphanies/epiphanies'
         else 
             redirect to '/epiphanies/new'
@@ -33,6 +32,8 @@ class EpiphaniesController < ApplicationController
         if !logged_in?
             redirect to '/login'
         else 
+            #refactor this = user.epiphanies should yield all your epiphanies
+            #current_user.epiphanies
             @all_epiphanies = []
             blank = Epiphany.all
             blank.each do |x|
@@ -46,7 +47,9 @@ class EpiphaniesController < ApplicationController
     end 
 
     get '/epiphanies/:id/edit' do 
-        if !logged_in? 
+        if !logged_in?
+            #authentication vs authorization 
+            #auth = epiphanies.user_id = current_user.id
             redirect to '/login'
         else 
             @epiphanies = Epiphany.find_by(id: params[:id])
