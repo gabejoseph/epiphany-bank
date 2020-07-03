@@ -2,8 +2,8 @@
 </br><i>click to edit</i>
 </br>
 
-<% if !@all_epiphanies.empty? %>
-    <% @all_epiphanies.each do |x| %>
+<% if !@epiphanies.empty? %>
+    <% @epiphanies.each do |x| %>
         </br><a href="/epiphanies/<%= x.id %>/edit"><%= x.content %></a></br>
     <% end  %>
 <% else %>

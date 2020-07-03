@@ -32,28 +32,21 @@ class EpiphaniesController < ApplicationController
         if !logged_in?
             redirect to '/login'
         else 
-            #refactor this = user.epiphanies should yield all your epiphanies
-            #current_user.epiphanies
-            @all_epiphanies = []
-            blank = Epiphany.all
-            blank.each do |x|
-                if x.user_id == session[:user_id]
-                    @all_epiphanies << x
-                end 
-            end 
-            @epiphanies = Epiphany.find_by(user_id: params[:id])
+            @epiphanies = current_user.epiphanies
             erb :'/epiphanies/show'
         end 
     end 
 
     get '/epiphanies/:id/edit' do 
-        if !logged_in?
-            #authentication vs authorization 
-            #auth = epiphanies.user_id = current_user.id
+        if !logged_in? 
             redirect to '/login'
         else 
             @epiphanies = Epiphany.find_by(id: params[:id])
-            erb :'/epiphanies/edit'
+            if @epiphanies.user_id == current_user.id
+                erb :'/epiphanies/edit'
+            else 
+                redirect to '/epiphanies/show'
+            end 
         end 
     end 
     
